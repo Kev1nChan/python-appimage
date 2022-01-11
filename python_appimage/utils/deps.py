@@ -78,8 +78,7 @@ def ensure_patchelf():
     if os.path.exists(PATCHELF):
         return False
 
-    iarch = 'i386' if _ARCH == 'i686' else _ARCH
-    patchelf_package = 'patchelf-{version}-{iarch}.tar.gz'.format(version=PATCHELF_VERSION, iarch=iarch)
+    patchelf_package = 'patchelf-{version}-{iarch}.tar.gz'.format(version=PATCHELF_VERSION, iarch=_ARCH)
     baseurl = 'https://github.com/NixOS/patchelf/releases/download/'
     log('INSTALL', 'patchelf from %s', baseurl)
 
