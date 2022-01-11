@@ -28,6 +28,8 @@ EXCLUDELIST = PREFIX + '/data/excludelist'
 PATCHELF = os.path.expanduser('~/.local/bin/patchelf')
 '''Location of the PatchELF binary'''
 
+PATCHELF_VERSION = "0.14.3"
+
 
 def ensure_appimagetool():
     '''Fetch appimagetool from the web if not available locally
@@ -77,18 +79,18 @@ def ensure_patchelf():
         return False
 
     iarch = 'i386' if _ARCH == 'i686' else _ARCH
-    appimage = 'patchelf-{0:}.AppImage'.format(iarch)
-    baseurl = 'https://github.com/niess/patchelf.appimage/releases/download'
+    patchelf_package = 'patchelf-{version}-{iarch}.tar.gz'.format(version=PATCHELF_VERSION, iarch=iarch)
+    baseurl = 'https://github.com/NixOS/patchelf/releases/download/'
     log('INSTALL', 'patchelf from %s', baseurl)
 
     dirname = os.path.dirname(PATCHELF)
     patchelf = dirname + '/patchelf'
     make_tree(dirname)
     with TemporaryDirectory() as tmpdir:
-        urlretrieve(os.path.join(baseurl, 'rolling', appimage), appimage)
-        os.chmod(appimage, stat.S_IRWXU)
-        system(('./' + appimage, '--appimage-extract'))
-        copy_file('squashfs-root/usr/bin/patchelf', patchelf)
+        urlretrieve(os.path.join(baseurl, PATCHELF_VERSION, patchelf_package), patchelf_package)
+        os.chmod(patchelf_package, stat.S_IRWXU)
+        system(('tar', "-zxf", patchelf_package))
+        copy_file('bin/patchelf', patchelf)
     os.chmod(patchelf, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
 
     return True
