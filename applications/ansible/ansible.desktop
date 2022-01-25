@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ansible
+Exec=ansible
+Comment=ansible tool
+Icon=ansible
+Categories=Science;
+Terminal=true

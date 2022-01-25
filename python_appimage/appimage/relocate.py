@@ -302,7 +302,11 @@ def relocate_python(python=None, appdir=None):
                 if not tkpath:
                     raise ValueError('could not find ' + tkpath)
                 copy_tree(tkpath, tcltkdir + '/tk' + tk_version)
-
+    
+    # Copy sshpass to AppDir/usr/bin/
+    sshpass_file = '/usr/bin/sshpass'
+    if os.path.exists(sshpass_file):
+        copy_file(sshpass_file, APPDIR_BIN + '/sshpass')
 
     # Copy any SSL certificate
     cert_file = os.getenv('SSL_CERT_FILE')

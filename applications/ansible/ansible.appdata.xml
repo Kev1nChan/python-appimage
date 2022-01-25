@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>ansible</id>
+    <metadata_license>MIT</metadata_license>
+    <project_license>Python-3.8</project_license>
+    <name>Ansible</name>
+    <summary>ansible tool</summary>
+    <description>
+        <p>  use ansible-playbook deploy project
+        </p>
+    </description>
+    <launchable type="desktop-id">ansible.desktop</launchable>
+    <url type="homepage">https://www.ansible.com</url>
+    <provides>
+        <binary>ansible</binary>
+    </provides>
+</component>

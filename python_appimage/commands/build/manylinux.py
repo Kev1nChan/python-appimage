@@ -48,6 +48,7 @@ def execute(tag, abi, contained=False):
             argv = ' '.join(sys.argv[1:])
             script = (
                 'yum --disablerepo="*" --enablerepo=base install -q -y tk',
+                'yum -y install sshpass',
                 python + ' -m python_appimage ' + argv + ' --contained',
                 ''
             )
